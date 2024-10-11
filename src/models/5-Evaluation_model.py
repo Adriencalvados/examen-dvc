@@ -10,13 +10,9 @@ def import_dataset(file_path, **kwargs):
 
 # Chargement des données pour évaluation (Remplacer par votre méthode de chargement)
 input_filepath='./data/processed'
-fX_train = f"{input_filepath}/X_train_scaled.csv"
-f_ytrain = f"{input_filepath}/y_train.csv"
 fX_test = f"{input_filepath}/X_test_scaled.csv"
 f_ytest = f"{input_filepath}/y_test.csv"
     # Import datasets
-X_train = import_dataset(fX_train,header=None)
-y_train = import_dataset(f_ytrain)
 X_test = import_dataset(fX_test,header=None)
 y_test = import_dataset(f_ytest)
 

@@ -17,8 +17,6 @@ f_ytest = f"{input_filepath}/y_test.csv"
     # Import datasets
 X_train = import_dataset(fX_train,header=None)
 y_train = import_dataset(f_ytrain)
-X_test = import_dataset(fX_test,header=None)
-y_test = import_dataset(f_ytest)
 
 # import best param du fichier .pkl
 model_filename = 'models/best_param_ridge_model.pkl'
@@ -31,11 +29,6 @@ model = Ridge(alpha=best_params['alpha'], solver=best_params['solver'])
 
 # Entraîner le modèle sur les données d'entraînement
 model.fit(X_train, y_train)
-
-# Évaluer le modèle sur l'ensemble de test
-y_pred = model.predict(X_test)
-test_mse = mean_squared_error(y_test, y_pred)
-print(f"MSE sur les données de test : {test_mse}")
 
 # Sauvegarder le modèle entraîné dans un fichier .pkl
 model_filename = 'models/trained_ridge_model.pkl'

@@ -1,0 +1,54 @@
+stages:
+  split:
+    cmd: python src/data/1-import_raw_data.py
+    deps:
+    - data/raw
+    - src/data/1-import_raw_data.py
+    outs:
+    - data/processed/X_test.csv
+    - data/processed/y_test.csv
+    - data/processed/X_train.csv
+    - data/processed/y_train.csv
+
+  normalize:
+    cmd: python src/data/2-make_dataset.py
+    deps:
+    - src/data/2-make_dataset.py
+    - data/processed/X_test.csv
+    - data/processed/y_test.csv
+    - data/processed/X_train.csv
+    - data/processed/y_train.csv
+    outs:
+    - data/processed/X_test_scaled.csv
+    - data/processed/X_train_scaled.csv
+
+  gridsearch:
+    cmd: python src/models/3-Gridsearch.py
+    deps:
+    - data/processed/X_train_scaled.csv
+    - data/processed/y_train.csv
+    - src/models/3-Gridsearch.py
+    outs:
+    - models/best_param_ridge_model.pkl
+
+  training:
+    cmd: python src/models/4-model.py
+    deps:
+    - data/processed/y_train.csv
+    - data/processed/X_train_scaled.csv
+    - src/models/4-model.py
+    - models/best_param_ridge_model.pkl
+    outs:
+    - models/trained_ridge_model.pkl
+
+  evaluate:
+    cmd: python src/models/5-Evaluation_model.py
+    deps:
+    - data/processed/X_test.csv
+    - data/processed/X_test_scaled.csv
+    - src/models/5-Evaluation_model.py
+    outs:
+
+    - data/predictions.csv
+    metrics:
+    - metrics/scores.json
