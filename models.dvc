@@ -1,0 +1,6 @@
+outs:
+- md5: cdbead08677a5542e29a7c8bc2a24fa8.dir
+  size: 606
+  nfiles: 3
+  hash: md5
+  path: models
