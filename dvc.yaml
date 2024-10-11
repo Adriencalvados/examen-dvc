@@ -48,7 +48,6 @@ stages:
     - data/processed/X_test_scaled.csv
     - src/models/5-Evaluation_model.py
     outs:
-
     - data/predictions.csv
     metrics:
     - metrics/scores.json
